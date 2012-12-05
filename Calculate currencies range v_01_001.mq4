@@ -46,7 +46,7 @@ void rebalansrangesimple()
    //lots = 0.09169999967-1.600000000*10^(-10)*sqrt(3.284722633*10^17-7.812500001*10^12*k)
    //699999998E--2,0000000000E- sqrt(2,1022224999E--5,0000000000E- k)
    //lots = NormalizeDouble(0.091699999670-MathSqrt(0.008408889940-0.0000002 * AccountBalance()),4);
-   lots = -1.175+0.9999999999*minEUR-MathSqrt(1.380625000-2.350000000*minEUR+minEUR*minEUR-0.0000002*AccountBalance()/3);
+   lots = -1.175+0.9999999999*minEUR-MathSqrt(1.380625000-2.350000000*minEUR+minEUR*minEUR-0.0000002*AccountBalance()/5);
    
    //Print("lots: ", lots, " mult:", 0.0000002*AccountBalance());
    //Print("lots: ", lots, " mult: ", 0.008408889940-0.0000002 * AccountBalance());

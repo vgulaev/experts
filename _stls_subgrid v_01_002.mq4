@@ -11,7 +11,7 @@
 //+------------------------------------------------------------------+
 string strategyname;
 int step = 2;
-double lotsize = 0.03;
+double lotsize = 0.05;
 double price[];
 double minopenprice;
 double pricehigh;
