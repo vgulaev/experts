@@ -4,9 +4,10 @@
 
 *.ex4
 *.log
+mqlcache.dat
 samples
 include
-mqlcache.dat
+scripts/mqlcache.dat
 
 #################
 ## Eclipse
