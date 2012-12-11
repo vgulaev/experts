@@ -143,6 +143,7 @@ void findhole()
    {
    if (OrderSelect(pos, SELECT_BY_POS) == false) continue;
    if (!checkstrategy(OrderComment())) continue;
+   if (StringLen(OrderComment()) > 20) continue;
    //if (OrderLots() != 0.01) continue;
    //if (OrderLots() != 0.02) continue;
    //if (OrderLots() != 0.03) continue;
