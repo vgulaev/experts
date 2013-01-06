@@ -39,14 +39,14 @@ void rebalansrangesimple()
    double lots;
    double minEUR;
    
-   minEUR = 1.3128;
-   priceEURhigh = 1.3128;
+   minEUR = 1.3259;
+   priceEURhigh = 1.3259;
    //priceEURlow = 1.2667 - NormalizeDouble((19000 - AccountMargin())/50*Point*10,4);
    
    //lots = 0.09169999967-1.600000000*10^(-10)*sqrt(3.284722633*10^17-7.812500001*10^12*k)
    //699999998E--2,0000000000E- sqrt(2,1022224999E--5,0000000000E- k)
    //lots = NormalizeDouble(0.091699999670-MathSqrt(0.008408889940-0.0000002 * AccountBalance()),4);
-   lots = -1.175+0.9999999999*minEUR-MathSqrt(1.380625000-2.350000000*minEUR+minEUR*minEUR-0.0000002*AccountBalance()/5);
+   lots = -1.175+0.9999999999*minEUR-MathSqrt(1.380625000-2.350000000*minEUR+minEUR*minEUR-0.0000002*AccountBalance()/2.2);
    
    //Print("lots: ", lots, " mult:", 0.0000002*AccountBalance());
    //Print("lots: ", lots, " mult: ", 0.008408889940-0.0000002 * AccountBalance());
@@ -106,7 +106,8 @@ int sendincomeinformation()
    {
       s = s + sum[i];
       msg = sym[i] + " : " + DoubleToStr(sum[i], 2) + "$ lots: " + DoubleToStr(lots[i], 2) + " swap: " + DoubleToStr(swap[i], 2);
-      SendNotification(msg);
+      //SendNotification(msg);
+      SendMail(msg, "С найлучшими");
       Print("Send to phone: ", msg);
       sum[i] = 0;
       lots[i] = 0;
