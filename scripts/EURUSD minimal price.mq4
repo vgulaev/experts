@@ -14,52 +14,28 @@ int start()
 //----
    int total;
    int pos, i;
-   int symbolstotal;
-   double sum[];
-   double swap[];
-   double lots[];   
-   string sym[];
-   string msg;
-   double s;
-   
-   symbolstotal = 1;
-   ArrayResize(sym, symbolstotal);
-   ArrayResize(sum, symbolstotal);
-   ArrayResize(lots, symbolstotal);
-   ArrayResize(swap, symbolstotal);
-   
-   sym[0] = "EURUSD";
-   
+   double lots;
+   double price;
+   double sum;
+
+   lots = 0;
+   sum = 0;   
    total = OrdersTotal();
    for (pos = 0; pos<total; pos++)
    {
-   if (OrderSelect(pos, SELECT_BY_POS) == false) continue;
-      for (i = 0; i<symbolstotal; i++)
-      {
-      if (OrderSymbol() == sym[i])
-      {
-      swap[i] = swap[i] + OrderSwap();
-      if (OrderProfit() > 0)
-      {
-      sum[i] = sum[i] + OrderProfit() + OrderSwap() + OrderCommission();
-      lots[i] = lots[i] + OrderLots();
-      }
-      }
-      }
+      if (OrderSelect(pos, SELECT_BY_POS) == false) continue;
+      if (OrderSymbol() != "EURUSD") continue;
+      if (OrderType() == OP_BUYSTOP) continue;
+      //if (OrderType() != OP_BUY) continue;
+      sum = sum + OrderLots() * OrderOpenPrice();
+      lots = lots + OrderLots();
    }
+   price = sum/lots;
    
-   for (i = 0; i<symbolstotal; i++)
-   {
-      s = s + sum[i];
-      msg = sym[i] + " : " + DoubleToStr(sum[i], 2) + "$ lots: " + DoubleToStr(lots[i], 2) + " swap: " + DoubleToStr(swap[i], 2);
-      //SendNotification(msg);
-      SendMail(msg, "С найлучшими");
-      Print("Send to phone: ", msg);
-      sum[i] = 0;
-      lots[i] = 0;
-      swap[i] = 0;
-   }
-   //Print("Total sum: ", s);
+   double delta;
+   delta = (AccountBalance()) / (100000 * lots);
+   
+   Print("Total lots: ", lots, " average price: ", price, " minimal: ", price - delta, " in persent: ": (Bid-(price - delta))/Bid*100);
 //----
    return(0);
   }

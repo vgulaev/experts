@@ -4,6 +4,7 @@
 
 *.ex4
 *.log
+*.dat
 mqlcache.dat
 samples
 include
