@@ -33,7 +33,7 @@ int start()
    price = sum/lots;
    
    double delta;
-   delta = (AccountBalance()) / (100000 * lots);
+   delta = (AccountBalance() - 270 * lots) / (100000 * lots);
    
    Print("Total lots: ", lots, " average price: ", price, " minimal: ", price - delta, " in persent: ": (Bid-(price - delta))/Bid*100);
 //----
