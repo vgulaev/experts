@@ -32,15 +32,15 @@ int deinit()
    return(0);
   }
 
-void rebalansrangesimple()
+void rebalansrangesimpleEURUSD()
 {
    double priceEURhigh;
    double priceEURlow;
    double lots;
    double minEUR;
    
-   minEUR = 1.3259;
-   priceEURhigh = 1.3259;
+   minEUR = 1.3340;
+   priceEURhigh = 1.3340;
    //priceEURlow = 1.2667 - NormalizeDouble((19000 - AccountMargin())/50*Point*10,4);
    
    //lots = 0.09169999967-1.600000000*10^(-10)*sqrt(3.284722633*10^17-7.812500001*10^12*k)
@@ -130,7 +130,7 @@ int start()
    {
    //price = MarketInfo("EURCHF", MODE_BID);
    //MailText = potentialOfStrategy() + "Best regards";
-   rebalansrangesimple();
+   rebalansrangesimpleEURUSD();
    sendincomeinformation();
    //rebalansrangeEURUSD();
    //rebalansrangeCHFUSD();

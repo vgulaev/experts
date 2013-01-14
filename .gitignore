@@ -9,6 +9,8 @@ mqlcache.dat
 samples
 include
 scripts/mqlcache.dat
+files/
+libraries/
 
 #################
 ## Eclipse
