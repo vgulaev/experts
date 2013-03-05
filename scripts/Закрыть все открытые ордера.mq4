@@ -35,8 +35,10 @@ int start()
      //if (((ordtype == OP_SELL)||(ordtype == OP_BUY))&&(StringSubstr(OrderComment(),0,lengthName) == idstrategy)&&OrderProfit()>0)
      //if (((ordtype == OP_SELL)||(ordtype == OP_BUY))&&(OrderComment()==idstrategy))
      //if (((ordtype == OP_SELL)||(ordtype == OP_BUY)))
-     if (((ordtype == OP_SELL)||(ordtype == OP_BUY))&&(OrderProfit()>0.3))
+     //if (((ordtype == OP_SELL)||(ordtype == OP_BUY))&&(OrderProfit()>0.3))
      //if ((ordtype == OP_BUY)&&(OrderSymbol() == Symbol()))
+     if ((StringLen(OrderComment())< 17)&&(OrderProfit()+OrderCommission()>0.2))
+     //if ((OrderLots() == 0.01)&&(OrderProfit()+OrderCommission()>0.2))
      {
       ArrayResize(tickets, k + 1);
       tickets[k] = OrderTicket();
@@ -63,6 +65,7 @@ int start()
          price = MarketInfo(OrderSymbol(), MODE_BID);
          }
      ifclose = OrderClose(OrderTicket(),OrderLots(),price, 0);
+     //Print(OrderComment());
      break;
      if (ifclose == true)
      {

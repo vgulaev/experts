@@ -36,6 +36,7 @@ int start()
    delta = (AccountBalance() - 270 * lots) / (100000 * lots);
    
    Print("Total lots: ", lots, " average price: ", price, " minimal: ", price - delta, " in persent: ": (Bid-(price - delta))/Bid*100);
+   Print((Bid - price)*(100000 * lots), " == ",AccountProfit());
 //----
    return(0);
   }

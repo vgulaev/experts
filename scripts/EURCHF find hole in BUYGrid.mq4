@@ -11,6 +11,7 @@
 //+------------------------------------------------------------------+
 string strategyname;
 int namelenght;
+double lotsize = 0.03;
 double prices[];
 
 bool checkstrategy(string sn)
@@ -97,7 +98,6 @@ string modificator(int op, double p)
 void createorders(double min, double max)
 {
    double price;
-   double lotsize;
    int otype;
    
    //Print("min:", min, " max:", max);
@@ -109,7 +109,6 @@ void createorders(double min, double max)
    otype = OP_BUY;
    //lotsize = 0.02;
    //lotsize = 0.01;
-   lotsize = 0.05;
    //OrderSend(Symbol(), determinateoperation(otype, price), lotsize, price, 0, 0, 0, strategyname + modificator(otype, price));
    //if (determinateoperation(otype, price) == OP_BUYSTOP)
    //if (price < 1.2065)
