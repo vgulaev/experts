@@ -11,7 +11,7 @@
 //+------------------------------------------------------------------+
 string strategyname;
 int namelenght;
-double lotsize = 0.03;
+double lotsize = 0.04;
 double prices[];
 
 bool checkstrategy(string sn)
@@ -111,10 +111,10 @@ void createorders(double min, double max)
    //lotsize = 0.01;
    //OrderSend(Symbol(), determinateoperation(otype, price), lotsize, price, 0, 0, 0, strategyname + modificator(otype, price));
    //if (determinateoperation(otype, price) == OP_BUYSTOP)
-   //if (price < 1.2065)
-   //{
+   if (determinateoperation(otype, price) == OP_BUYLIMIT)
+   {
    OrderSend(Symbol(), determinateoperation(otype, price), lotsize, price, 0, 0, 0, strategyname + DoubleToStr(price,Digits-1));
-   //}
+   }
    
    Print(price, " ot:", otype);
    price = price + Point*10;
@@ -143,6 +143,7 @@ void findhole()
    if (OrderSelect(pos, SELECT_BY_POS) == false) continue;
    if (!checkstrategy(OrderComment())) continue;
    if (StringLen(OrderComment()) > 20) continue;
+   if (StringLen(OrderComment())< 17) continue;
    //if (OrderLots() != 0.01) continue;
    //if (OrderLots() != 0.02) continue;
    //if (OrderLots() != 0.03) continue;

@@ -1,5 +1,5 @@
 //+------------------------------------------------------------------+
-//|                                  EURCHF create SELL BUY grid.mq4 |
+//|                                          EURCHF Create range.mq4 |
 //|                      Copyright © 2011, MetaQuotes Software Corp. |
 //|                                        http://www.metaquotes.net |
 //+------------------------------------------------------------------+
@@ -9,80 +9,44 @@
 //+------------------------------------------------------------------+
 //| script program start function                                    |
 //+------------------------------------------------------------------+
-int determinateoperation(int op, double p) 
-{
-   int result;
-   RefreshRates();
-   if (op == OP_BUY)
-   {
-   if (p < Ask)
-   {
-   result = OP_BUYLIMIT;
-   }
-   else
-   {
-   result = OP_BUYSTOP;
-   }
-   }
-   else if (op == OP_SELL)
-   {
-   if (p > Bid)
-   {
-   result = OP_SELLLIMIT;
-   }
-   else
-   {
-   result = OP_SELLSTOP;
-   }
-   }
-   return(result);
-}
-
-string modificator(int op, double p) 
-{
-   string result;
-   if (op == OP_BUY)
-   {
-   result = " BUY  ";
-   }
-   else
-   {
-   result = " SELL ";
-   }
-   result = result + DoubleToStr(p,4);
-   return(result);
-}
-
+string strategyname;
 int start()
   {
 //----
+   int op;
    int pos;
-   double price;
-   int otype;
-   int ticket;
-   string strategyname;
-   strategyname = "sellgrig v0_01";
+   double lotsize;
+   double openprice;
+   string ordername;
    
-   price = 1.2164;
-   otype = OP_SELL;
-   //otype = OP_BUY;
+   strategyname = Symbol() + " v0_002 ";
+   //op = OP_BUYSTOP;
+   op = OP_SELLLIMIT;
+   //op = OP_SELLSTOP;
+   //op = OP_BUYLIMIT;
+   //lotsize = 0.03;
+   lotsize = 0.04;
    
-   for (pos=0;pos<20;pos++)
+   openprice = 1.30;
+   //ordername = "sellbuy v0_01 SELL " + DoubleToStr(openprice, 4);
+   //ordername = "sellbuy v0_01 BUY " + DoubleToStr(openprice, 4);
+   //ordername = "Subgrid Grid 001 " + DoubleToStr(openprice, 4);
+   //OrderSend(Symbol(), op, lotsize, openprice, 0, 0, 0, ordername);
+   
+   //openprice = 1.2008;
+   for (pos = 0;pos<100;pos++)
    {
-   ticket = -1;
-   while (ticket < 0)
-   {
-   ticket = OrderSend(Symbol(), determinateoperation(otype, price), 0.01, price, 0, 0, 0, strategyname + modificator(otype, price));
-   //Print(otype, " ", determinateoperation(otype, price));
-   if (ticket < 0)
-      {
-      //Print("OrderSend failed with error #",GetLastError());
-      }
+   //op = OP_BUYLIMIT;
+   //op = OP_SELLSTOP;
+   //op = OP_SELLLIMIT;
+   //ordername = "EURCHF v0_020 " + DoubleToStr(openprice, 4);
+   ordername = strategyname + DoubleToStr(openprice, 4);
+   //ordername = "Subgrid Grid " + DoubleToStr(openprice, 4);
+   //ordername = "Subgrid Grid 001 " + DoubleToStr(openprice, 4);
+   OrderSend(Symbol(), op, lotsize, openprice, 0, 0, 0, ordername);
+   openprice = openprice + 10*Point;
    }
-   //otype = (otype + 1) % 2;
-   price = price - Point;
-   //price = price - Point*2;
-   }
+   
 //----
    return(0);
   }

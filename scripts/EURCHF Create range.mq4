@@ -24,17 +24,17 @@ int start()
    //op = OP_SELLLIMIT;
    //op = OP_SELLSTOP;
    op = OP_BUYLIMIT;
-   lotsize = 0.03;
-   //lotsize = 0.04;
+   //lotsize = 0.03;
+   lotsize = 0.04;
    
-   openprice = 1.2990;
+   openprice = 1.2740;
    //ordername = "sellbuy v0_01 SELL " + DoubleToStr(openprice, 4);
    //ordername = "sellbuy v0_01 BUY " + DoubleToStr(openprice, 4);
    //ordername = "Subgrid Grid 001 " + DoubleToStr(openprice, 4);
    //OrderSend(Symbol(), op, lotsize, openprice, 0, 0, 0, ordername);
    
    //openprice = 1.2008;
-   for (pos = 0;pos<50;pos++)
+   for (pos = 0;pos<10;pos++)
    {
    //op = OP_BUYLIMIT;
    //op = OP_SELLSTOP;

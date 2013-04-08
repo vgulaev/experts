@@ -15,23 +15,28 @@ void printprofitbysymbol()
    int pos, i;
    int symbolstotal;
    double sum[];
+   double sum_sell[];
    double swap[];
-   double lots[];   
+   double lots[];
+   double lots_sell[];
    string sym[];
    double s;
    
-   symbolstotal = 6;
+   symbolstotal = 1;
    ArrayResize(sym, symbolstotal);
    ArrayResize(sum, symbolstotal);
    ArrayResize(lots, symbolstotal);
    ArrayResize(swap, symbolstotal);
    
+   ArrayResize(sum_sell, symbolstotal);
+   ArrayResize(lots_sell, symbolstotal);
+
    sym[0] = "EURUSD";
-   sym[1] = "USDCHF";
-   sym[2] = "NZDCHF";
-   sym[3] = "AUDCHF";
-   sym[4] = "EURJPY";
-   sym[5] = "EURGBP";
+   //sym[1] = "USDCHF";
+   //sym[2] = "NZDCHF";
+   //sym[3] = "AUDCHF";
+   //sym[4] = "EURJPY";
+   //sym[5] = "EURGBP";
    
    
    total = OrdersTotal();
@@ -45,8 +50,16 @@ void printprofitbysymbol()
       swap[i] = swap[i] + OrderSwap();
       if (OrderProfit() > 0)
       {
-      sum[i] = sum[i] + OrderProfit() + OrderSwap() + OrderCommission();
-      lots[i] = lots[i] + OrderLots();
+         if (OrderType() == OP_BUY)
+         {
+            sum[i] = sum[i] + OrderProfit() + OrderSwap() + OrderCommission();
+            lots[i] = lots[i] + OrderLots();
+         }
+         if (OrderType() == OP_SELL)
+         {
+            sum_sell[i] = sum_sell[i] + OrderProfit() + OrderSwap() + OrderCommission();
+            lots_sell[i] = lots_sell[i] + OrderLots();
+         }
       }
       }
       }
@@ -55,7 +68,8 @@ void printprofitbysymbol()
    for (i = 0; i<symbolstotal; i++)
    {
       s = s + sum[i];
-      Print(sym[i], " : ",sum[i], " lots: ", lots[i], " swap: ", swap[i]);
+      Print(sym[i], " Buy : ", sum[i], " lots: ", lots[i], " swap: ", swap[i]);
+      Print(sym[i], " Sell : ", sum_sell[i], " lots: ", lots_sell[i], " swap: ", swap[i]);
    }
    Print("Total sum: ", s);
 }
