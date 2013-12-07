@@ -17,6 +17,7 @@ int start()
    double lots;
    double price;
    double sum;
+   int k;
 
    lots = 0;
    sum = 0;   
@@ -25,14 +26,20 @@ int start()
    {
       if (OrderSelect(pos, SELECT_BY_POS) == false) continue;
       if (OrderSymbol() != "EURUSD") continue;
-      if (OrderType() == OP_BUYSTOP) continue;
+      if ((OrderType() == OP_BUYSTOP)||(OrderType() == OP_SELLLIMIT)) continue;
       //if (OrderType() != OP_BUY) continue;
-      sum = sum + OrderLots() * OrderOpenPrice();
-      lots = lots + OrderLots();
+      k = 1;
+      if (OrderType() == OP_SELL)
+      {
+         k = -1;
+      }
+      sum = sum + OrderLots() * OrderOpenPrice() * k;
+      lots = lots + OrderLots() * k;
    }
    price = sum/lots;
    
    double delta;
+   //
    delta = (AccountBalance() - 270 * lots) / (100000 * lots);
    
    Print("Total lots: ", lots, " average price: ", price, " minimal: ", price - delta, " in persent: ": (Bid-(price - delta))/Bid*100);

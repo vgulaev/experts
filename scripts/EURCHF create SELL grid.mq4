@@ -27,7 +27,7 @@ int start()
    //lotsize = 0.03;
    lotsize = 0.04;
    
-   openprice = 1.30;
+   openprice = 1.31;
    //ordername = "sellbuy v0_01 SELL " + DoubleToStr(openprice, 4);
    //ordername = "sellbuy v0_01 BUY " + DoubleToStr(openprice, 4);
    //ordername = "Subgrid Grid 001 " + DoubleToStr(openprice, 4);

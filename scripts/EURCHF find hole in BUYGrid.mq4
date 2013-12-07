@@ -11,7 +11,7 @@
 //+------------------------------------------------------------------+
 string strategyname;
 int namelenght;
-double lotsize = 0.04;
+double lotsize = 0.01;
 double prices[];
 
 bool checkstrategy(string sn)

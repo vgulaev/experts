@@ -11,6 +11,7 @@
 //+------------------------------------------------------------------+
 string strategyname;
 int namelenght;
+double lotsize = 0.04;
 double prices[];
 
 bool checkstrategy(string sn)
@@ -23,9 +24,7 @@ bool checkstrategy(string sn)
 double pricefromcomment(string sc)
 {
    double result;
-   int position;
-   position = StringLen(OrderComment()) - 6; 
-   result = StrToDouble(StringSubstr(OrderComment(), position));
+   result = StrToDouble(StringSubstr(OrderComment(), 13));
    return(result);
 }
 
@@ -99,7 +98,6 @@ string modificator(int op, double p)
 void createorders(double min, double max)
 {
    double price;
-   double lotsize;
    int otype;
    
    //Print("min:", min, " max:", max);
@@ -110,30 +108,27 @@ void createorders(double min, double max)
    otype = OP_SELL;
    //otype = OP_BUY;
    //lotsize = 0.02;
-   lotsize = 0.01;
-   if (otype == 1)
-   {
-   //lotsize = 0.02;
    //lotsize = 0.01;
-   }
    //OrderSend(Symbol(), determinateoperation(otype, price), lotsize, price, 0, 0, 0, strategyname + modificator(otype, price));
-   //if (price > 1.211)
+   //if (determinateoperation(otype, price) == OP_BUYSTOP)
+   if (determinateoperation(otype, price) == OP_SELLLIMIT)
    {
    OrderSend(Symbol(), determinateoperation(otype, price), lotsize, price, 0, 0, 0, strategyname + DoubleToStr(price,Digits-1));
    }
+   
    Print(price, " ot:", otype);
-   price = price + 10 * Point;
+   price = price + Point*10;
    price = NormalizeDouble(price, Digits-1);
    }
 }
 
 void findhole()
 {
-   //strategyname = "Subgrid Grid 001 ";
-   //strategyname = "EURCHF v0_009 ";
-   //strategyname = "EURNZD v0_001 ";
-   strategyname = Symbol() + " v0_001 ";
-   //strategyname = "sellbuy v0_01 SELL ";
+   //strategyname = "Subgrid Grid ";
+   //strategyname = "EURCHF v0_001 ";
+   //strategyname = "EURUSD v0_001 ";
+   //strategyname = "USDCHF v0_001 ";
+   strategyname = Symbol() + " v0_002 ";   
    namelenght = StringLen(strategyname);
    
    int total;
@@ -147,7 +142,11 @@ void findhole()
    {
    if (OrderSelect(pos, SELECT_BY_POS) == false) continue;
    if (!checkstrategy(OrderComment())) continue;
-   if (OrderLots() != 0.01) continue;
+   if (StringLen(OrderComment()) > 20) continue;
+   if (StringLen(OrderComment())< 17) continue;
+   //if (OrderLots() != 0.01) continue;
+   //if (OrderLots() != 0.02) continue;
+   //if (OrderLots() != 0.03) continue;
    if (OrderType() % 2 != 1) continue;
    //if (OrderTakeProfit() != 0) continue;
    //if (OrderOpenPrice() >1.2419) continue;
@@ -168,8 +167,9 @@ void findhole()
    {
    //Print(prices[pos], " ",prices[pos+1]);
    createorders(prices[pos+1],prices[pos]);
-   }
    //break;
+   }
+   
    }
 }
    

@@ -77,13 +77,13 @@ int start()
    if (OrderSymbol() != Symbol()) continue;
    //if (OrderComment() != idstategy) continue;
    otype = OrderType();   
-   if ((otype != OP_BUY)&&(otype != OP_SELL)&&(OrderOpenPrice()<1.1000))
+   //if ((otype != OP_BUY)&&(otype != OP_SELL)&&(OrderOpenPrice()<1.1000))
    //if ((otype != OP_BUY)&&(otype != OP_SELL)&&(checkstrategy(OrderComment()))&&(OrderOpenPrice()>1.245))
    //if ((otype != OP_BUY)&&(otype != OP_SELL)&&(OrderOpenPrice()>1.2437)&&(OrderOpenPrice()<1.2475))
    //if ((otype != OP_BUY)&&(otype != OP_SELL)&&(otype == OP_BUYSTOP))
-   //if ((otype != OP_BUY)&&(otype != OP_SELL))
+   if ((otype != OP_BUY)&&(otype != OP_SELL))
    //if ((otype != OP_BUY)&&(otype != OP_SELL)&&(OrderTakeProfit()!=0))
-   //if ((otype != OP_BUY)&&(otype != OP_SELL)&&(OrderLots() == 0.01))
+   //if ((otype != OP_BUY)&&(otype != OP_SELL)&&(OrderLots() == 0.1)&&(OrderOpenPrice()<1.3500))
    //if ((otype != OP_BUY)&&(otype != OP_SELL)&&(checkstrategy(OrderComment()))&&(OrderOpenPrice()>1.2049))
    //if ((otype != OP_BUY)&&(otype != OP_SELL)&&(OrderOpenPrice()>1.219)&&(checkstrategy(OrderComment())))
       {
